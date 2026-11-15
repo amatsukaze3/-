@@ -1,0 +1,16 @@
+{
+  "name": "よみあげさん（五色百人一首）",
+  "short_name": "よみあげさん",
+  "description": "福知山かるたWAVE制作 五色百人一首の読み上げアプリ",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f3e6",
+  "theme_color": "#3d4a8f",
+  "lang": "ja",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
