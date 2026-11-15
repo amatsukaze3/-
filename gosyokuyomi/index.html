@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>よみあげさん</title>
+<title>よみあげさん-jyohakyu-</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#3d4a8f">
-<meta name="apple-mobile-web-app-title" content="よみあげさん">
+<meta name="apple-mobile-web-app-title" content="よみあげさん-jyohakyu-">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="application-name" content="よみあげさん">
+<meta name="application-name" content="よみあげさん-jyohakyu-">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -89,12 +89,27 @@ details.panel summary{cursor:pointer;font-weight:700;color:var(--sub)}
 .note{font-size:13px;color:var(--sub);line-height:1.7}
 .note code{background:#f1ebe0;padding:1px 5px;border-radius:5px}
 .msg{font-size:13px;color:var(--accent);min-height:1.2em;margin-top:6px}
+.taOpen{font:inherit;font-weight:900;font-size:18px;color:#fff;background:#5654a2;border:0;border-radius:16px;padding:14px 22px;width:100%;cursor:pointer;box-shadow:0 3px 0 #3b397a;margin-bottom:14px}
+.taOpen:active{transform:translateY(2px);box-shadow:0 1px 0 #3b397a}
+#taPanel{border:2px solid #5654a2}
+#taPanel h2{color:#5654a2!important}
+.taCourses{display:grid;gap:8px;margin:8px 0 12px}
+.taCourse{font:inherit;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;color:var(--ink)}
+.taCourse b{display:block;font-size:16px}
+.taCourse span{font-size:13px;color:var(--sub)}
+.taCourse.on{border-color:#5654a2;background:#efeefa}
+.taGo{background:#5654a2!important}
+.taTimer{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-variant-numeric:tabular-nums}
+.taList{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:6px;font-family:"Shippori Mincho",serif;font-size:15px}
+.taList span{background:#fff;border:1px solid var(--line);border-radius:8px;padding:2px 8px}
+.taList span.rest{opacity:.5}
+.taList b{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1><span class="c" style="background:var(--ao)">五</span><span class="c" style="background:var(--momo)">色</span><span class="c" style="background:var(--ki)">百</span><span class="c" style="background:var(--midori)">人</span><span class="c" style="background:var(--dai)">一</span><span class="c" style="background:var(--ao)">首</span> よみあげさん</h1>
+    <h1><span class="c" style="background:var(--ao)">五</span><span class="c" style="background:var(--momo)">色</span><span class="c" style="background:var(--ki)">百</span><span class="c" style="background:var(--midori)">人</span><span class="c" style="background:var(--dai)">一</span><span class="c" style="background:var(--ao)">首</span> よみあげさん<span style="font-size:.7em;color:var(--teal)">-jyohakyu-</span></h1>
     <p>色をえらんで、よむ札をえらんで、スタート！</p>
   </header>
 
@@ -174,6 +189,19 @@ details.panel summary{cursor:pointer;font-weight:700;color:var(--sub)}
   </section>
 
   <!-- 録音 -->
+  <button class="taOpen" id="taOpen">⏱ タイムアタックにチャレンジ</button>
+  <section class="panel" id="taPanel" hidden>
+    <h2>⏱ タイムアタック（20枚からランダムに17枚を、決まった時間でよみます）</h2>
+    <div class="note">色をえらぶ</div>
+    <div class="row chips" id="taColors" style="margin:6px 0 12px"></div>
+    <div class="note">コースをえらぶ</div>
+    <div class="taCourses" id="taCourses"></div>
+    <div class="row">
+      <button class="btn taGo" id="taStart">▶ チャレンジ スタート</button>
+      <span class="note" id="taNote"></span>
+    </div>
+  </section>
+
   <details class="panel" id="studio">
     <summary>🎙 自分の声を使う（録音・音声ファイルの読み込み）</summary>
     <p class="note">
@@ -190,7 +218,7 @@ details.panel summary{cursor:pointer;font-weight:700;color:var(--sub)}
   <details class="panel" id="terms">
     <summary>📄 利用規約</summary>
     <div class="terms">
-      <p>「よみあげさん」（以下「本アプリ」）は、福知山かるたWAVEが制作した、五色百人一首の練習・試合のための読み上げアプリです。本アプリを使った時点で、この利用規約に同意したものとします。</p>
+      <p>「よみあげさん-jyohakyu-」（以下「本アプリ」）は、福知山かるたWAVEが制作した、五色百人一首の練習・試合のための読み上げアプリです。本アプリを使った時点で、この利用規約に同意したものとします。</p>
       <h3>1. 使えるところ</h3>
       <p>学校・家庭・かるた会・大会などで、どなたでも無料で使えます。</p>
       <h3>2. 音声について</h3>
@@ -494,7 +522,7 @@ async function say(n, part){
   if (part === 'shimo') return speak(p.ml);
   const len = +part.slice(1); return speak(p.tok.slice(0, len).join(''));
 }
-function stopAll(){ runId++; try{ speechSynthesis.cancel(); }catch(e){} audio.pause(); if (curSrc){ try{ curSrc.onended = null; curSrc.stop(); }catch(e){} curSrc = null; } clearTimeout(autoTimer); document.getElementById('stage').classList.remove('speaking'); }
+function stopAll(){ taCancel(); runId++; try{ speechSynthesis.cancel(); }catch(e){} audio.pause(); if (curSrc){ try{ curSrc.onended = null; curSrc.stop(); }catch(e){} curSrc = null; } clearTimeout(autoTimer); document.getElementById('stage').classList.remove('speaking'); }
 
 // ---------- 読み上げの流れ ----------
 let queue = [], pos = -1, revealed = false, autoTimer = null, rest = [], tieState = 'none'; // none | ask | final | no
@@ -696,6 +724,93 @@ $('btnShow').onclick = () => { revealed = true; render(); };
 $('btnStop').onclick = () => { stopAll(); render(); };
 
 if ('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+// ---------- タイムアタック ----------
+const TA_COURSES = [
+  { id: 'rookie', name: 'ルーキーカップ 入賞をめざす', desc: '上の句の5文字 ・ 17枚を24秒', mode: 'shoku', sec: 24 },
+  { id: 'champ1', name: 'チャンピオンズカップ 予選突破をめざす', desc: '上の句の5文字 ・ 17枚を15秒', mode: 'shoku', sec: 15 },
+  { id: 'champ2', name: 'チャンピオンズカップ 入賞をめざす', desc: '決まり字＋1文字 ・ 17枚を13秒', mode: 'kimari1', sec: 13 },
+];
+const ta = { color: (S.taColor || st.colors[0] || 'ao'), course: (S.taCourse || 'rookie'), srcs: [], raf: 0, running: false, id: 0 };
+function taCancel(){
+  if (!ta.running && !ta.srcs.length) return;
+  ta.id++; ta.running = false; cancelAnimationFrame(ta.raf);
+  ta.srcs.forEach(x => { try{ x.onended = null; x.stop(); }catch(e){} }); ta.srcs = [];
+}
+// 高さを変えずに速くする（WSOLA）
+function taStretch(x, sr, rate){
+  if (rate <= 1.02) return x;
+  const N = Math.round(sr * 0.03), Hs = N >> 1, Ha = Hs * rate, tol = Math.round(sr * 0.008), stepS = Math.max(1, Math.round(sr / 12000)), stepL = Math.max(1, Math.round(sr / 24000));
+  const outLen = Math.floor(x.length / rate), out = new Float32Array(outLen + N), win = new Float32Array(N);
+  for (let i = 0; i < N; i++) win[i] = 0.5 - 0.5 * Math.cos(2 * Math.PI * i / N);
+  let prev = 0;
+  for (let k = 0; k * Hs < outLen; k++){
+    let a = Math.round(k * Ha), best = 0;
+    if (k > 0){
+      const ref = prev + Hs; let bestC = -Infinity;
+      for (let d = -tol; d <= tol; d += stepL){
+        const p = a + d; if (p < 0 || p + N >= x.length || ref + N >= x.length) continue;
+        let c = 0; for (let i = 0; i < N; i += stepS) c += x[p + i] * x[ref + i];
+        if (c > bestC){ bestC = c; best = d; }
+      }
+    }
+    const p = Math.max(0, a + best), o = k * Hs;
+    for (let i = 0; i < N && p + i < x.length; i++) out[o + i] += x[p + i] * win[i];
+    prev = p;
+  }
+  return out.subarray(0, outLen);
+}
+function taLen(n, mode){ const fp = firstPhraseLen(n); return mode === 'shoku' ? fp : Math.min(COL[n] + 1, P[n].h.length); }
+async function taClip(n, mode, maxDur){
+  const ctx = actx, buf = await chantBuf(n), T = TIMESV[vkey()][n], sr = buf.sampleRate, len = taLen(n, mode);
+  // のばす音は短く切る（最後の音は約0.24秒まで）
+  let end = T.e[len - 1]; if (len >= 2) end = Math.min(end, T.e[len - 2] + 0.24);
+  let x = buf.getChannelData(0).slice(0, Math.floor(end * sr));
+  x = taStretch(x, sr, (x.length / sr) / maxDur);
+  const f = Math.min(x.length, Math.round(sr * 0.035)); for (let i = 0; i < f; i++) x[x.length - 1 - i] *= i / f;
+  const ob = ctx.createBuffer(1, x.length, sr); ob.getChannelData(0).set(x); return ob;
+}
+async function taStart(){
+  stopAll(); const ctx = ensureCtx(); if (!ctx || typeof CHANTS === 'undefined') return;
+  if (st.vmode === 'tts'){ st.vmode = 'nia'; $('vmode').value = 'nia'; $('vmode').dispatchEvent(new Event('change')); }
+  const course = TA_COURSES.find(c => c.id === ta.course), col = COLORS.find(c => c.id === ta.color);
+  const cards = col.list.slice(); for (let i = cards.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [cards[i], cards[j]] = [cards[j], cards[i]]; }
+  const read = cards.slice(0, 17), rest = cards.slice(17), slot = course.sec / 17, maxDur = slot - Math.max(0.05, slot * 0.08);
+  const myId = ++ta.id; ta.running = true; queue = []; pos = -1;
+  ['btnNext','btnAgain','btnShow'].forEach(b => $(b).disabled = true); $('btnStop').disabled = false;
+  $('stagePanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  $('tagBox').innerHTML = `<span class="tag" style="background:#5654a2">${col.name}札 ・ ${course.name}</span>`;
+  $('progress').textContent = course.desc; $('answer').innerHTML = ''; $('big').innerHTML = 'じゅんび中…';
+  let clips; try{ clips = []; for (const n of read){ clips.push(await taClip(n, course.mode, maxDur)); if (myId !== ta.id) return; } }catch(e){ $('big').innerHTML = '音声を用意できませんでした'; ta.running = false; return; }
+  for (const c of ['3','2','1']){ $('big').innerHTML = c; await new Promise(r => setTimeout(r, 800)); if (myId !== ta.id) return; }
+  const t0 = ctx.currentTime + 0.12;
+  read.forEach((n, i) => { const src = ctx.createBufferSource(); src.buffer = clips[i]; src.connect(ctx.destination); src.start(t0 + i * slot); ta.srcs.push(src); });
+  window.__ta = { slot, durs: clips.map(c => +c.duration.toFixed(3)), read };
+  const tick = () => {
+    if (myId !== ta.id) return;
+    const t = ctx.currentTime - t0, i = Math.min(16, Math.max(0, Math.floor(t / slot)));
+    if (t >= course.sec){
+      ta.running = false; ta.srcs = []; $('btnStop').disabled = true;
+      $('progress').textContent = `おわり！ 17枚を ${course.sec}秒でよみました`;
+      $('big').innerHTML = 'おつかれさま！';
+      $('answer').innerHTML = '<div class="note">よんだ札（よんだ順）</div><div class="taList">' + read.map(n => `<span>${prefixHTML(n, taLen(n, course.mode), false)}</span>`).join('') + '</div><div class="note" style="margin-top:8px">のこした3枚</div><div class="taList">' + rest.map(n => `<span class="rest">${P[n].hu.split(' ')[0]}</span>`).join('') + '</div>';
+      return;
+    }
+    $('big').innerHTML = `<span class="taTimer">${Math.max(0, t).toFixed(1)}</span><span style="font-size:.45em"> / ${course.sec}秒</span>`;
+    $('progress').textContent = `${t < 0 ? 0 : i + 1} / 17 枚目`;
+    ta.raf = requestAnimationFrame(tick);
+  };
+  tick();
+}
+function taRender(){
+  $('taColors').innerHTML = COLORS.map(c => `<button data-id="${c.id}" class="${ta.color===c.id?'on':''}" style="${ta.color===c.id?`background:var(--${c.id})`:`color:var(--${c.id})`}">${c.name}札</button>`).join('');
+  $('taColors').querySelectorAll('button').forEach(b => b.onclick = () => { ta.color = b.dataset.id; taSave(); taRender(); });
+  $('taCourses').innerHTML = TA_COURSES.map(c => `<button class="taCourse ${ta.course===c.id?'on':''}" data-id="${c.id}"><b>${c.name}</b><span>${c.desc}</span></button>`).join('');
+  $('taCourses').querySelectorAll('button').forEach(b => b.onclick = () => { ta.course = b.dataset.id; taSave(); taRender(); });
+  $('taNote').textContent = 'ちぃちゃん・ふっくんの声でよみます（「声」の設定でえらべます）';
+}
+function taSave(){ st.taColor = ta.color; st.taCourse = ta.course; save(); }
+$('taOpen').onclick = () => { const p = $('taPanel'); p.hidden = !p.hidden; if (!p.hidden){ taRender(); p.scrollIntoView({ behavior: 'smooth', block: 'center' }); } };
+$('taStart').onclick = taStart;
 bindGame(); bindSeg(); renderChips(); bindOpts(); renderGrid(); renderStudio(); refreshRec();
 </script>
 </body>
