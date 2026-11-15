@@ -1,20 +1,8 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 福知山かるたWAVE
 
-# Run and deploy your AI Studio app
+## よみあげさん（五色百人一首 読み上げアプリ）
 
-This contains everything you need to run your app locally.
+- アプリ：[`gosyokuyomi/`](gosyokuyomi/)
+- 公開アドレス（GitHub Pages 有効時）：https://amatsukaze3.github.io/-/gosyokuyomi/
 
-View your app in AI Studio: https://ai.studio/apps/drive/1tj66BD8Yu92jKeGaiDSBhmP7-wcxZQan
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+読み上げ音声：VOICEVOX:琴詠ニア ／ VOICEVOX:玄野武宏
