@@ -1,6 +1,6 @@
 # 福知山かるたWAVE
 
-## よみあげさん（五色百人一首 読み上げアプリ）
+## よみあげさん-jyohakyu-（五色百人一首 読み上げアプリ）
 
 - アプリ：[`gosyokuyomi/`](gosyokuyomi/)
 - 公開アドレス（GitHub Pages 有効時）：https://amatsukaze3.github.io/-/gosyokuyomi/
