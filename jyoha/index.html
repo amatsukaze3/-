@@ -127,6 +127,7 @@ details.panel summary{cursor:pointer;font-weight:700;color:var(--sub)}
     <h2 style="margin-top:14px">よみかた</h2>
     <div class="seg" id="modeSeg">
       <button data-v="full">全部（上の句＋下の句）</button>
+      <button data-v="kami">上の句まで</button>
       <button data-v="shoku">上の句の5文字</button>
     </div>
     <div class="opt">
@@ -361,7 +362,7 @@ const STD = {}; ALL.forEach(n => STD[n] = kimariLen(n, ALL));
 // ---------- 状態 ----------
 const S = load() || {};
 const st = {
-  mode: ['full','shoku'].includes(S.mode) ? S.mode : 'full', basis: S.basis || 'color', order: S.order || 'shuffle',
+  mode: ['full','kami','shoku'].includes(S.mode) ? S.mode : 'full', basis: S.basis || 'color', order: S.order || 'shuffle',
   colors: S.colors || ['ao'], off: new Set(S.off || []),
   repeatShimo: !!S.repeatShimo, hideText: S.hideText !== false, game: S.game || 'practice', auto: !!S.auto, autoSec: S.autoSec || 5,
   rate: S.rate || 0.8, voice: S.voice || '', useRec: S.useRec !== false, vmode: ['nia','fushi','tts'].includes(S.vmode) ? S.vmode : 'nia',
@@ -520,7 +521,9 @@ async function readCurrent(){
   await sleep(400);
   if (id !== runId) return;
   const len = readLen(n);
-  if (len === null){
+  if (st.mode === 'kami'){
+    await say(n, 'kami'); if (id !== runId) return;
+  } else if (len === null){
     await say(n, 'kami'); if (id !== runId) return;
     revealed = true; render(true, 'kamiDone');
     await sleep(useChant() ? 30 : 1000); if (id !== runId) return;
@@ -555,7 +558,7 @@ function render(){
   if (tieState === 'ask' && pos === queue.length - 1) $('btnNext').disabled = false;
   if (!revealed){ $('big').innerHTML = '…'; $('answer').innerHTML = ''; $('tagBox').innerHTML = ''; return; }
   $('tagBox').innerHTML = `<span class="tag" style="background:var(--${c.id})">${c.name} ${CARD[n].idx}</span>`;
-  $('big').innerHTML = len === null ? prefixHTML(n, kLen(n), false) : prefixHTML(n, len, false);
+  $('big').innerHTML = st.mode === 'kami' ? prefixHTML(n, P[n].h.length, false) : len === null ? prefixHTML(n, kLen(n), false) : prefixHTML(n, len, false);
   $('answer').innerHTML = `${P[n].ku}<br><span class="shimo">${P[n].kl}</span>`;
 }
 
@@ -591,7 +594,7 @@ function renderGrid(){
   const cards = poolCards();
   $('grid').innerHTML = cards.map(n => {
     const c = CARD[n].c, len = readLen(n);
-    const need = len === null ? [keyOf(n,'kami'), keyOf(n,'shimo')] : [keyOf(n,'p'+len)];
+    const need = st.mode === 'kami' ? [keyOf(n,'kami')] : len === null ? [keyOf(n,'kami'), keyOf(n,'shimo')] : [keyOf(n,'p'+len)];
     const has = need.every(k => recSet.has(k));
     return `<div class="fuda ${st.off.has(n)?'off':''}" data-n="${n}">
       <span class="num" style="background:var(--${c.id})">${CARD[n].idx}</span>
@@ -612,7 +615,8 @@ function neededClips(){
   const rows = [];
   poolCards().forEach(n => {
     const len = readLen(n);
-    if (len === null){
+    if (st.mode === 'kami') rows.push({ n, part: 'kami', text: P[n].hu.replace(/ /g,'　'), what: '上の句' });
+    else if (len === null){
       rows.push({ n, part: 'kami', text: P[n].hu.replace(/ /g,'　'), what: '上の句' });
       rows.push({ n, part: 'shimo', text: P[n].kl, what: '下の句' });
     } else rows.push({ n, part: 'p' + len, text: P[n].h.slice(0, len), what: `${len}文字` });
